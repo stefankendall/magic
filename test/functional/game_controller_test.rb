@@ -12,7 +12,7 @@ class GameControllerTest < ActionController::TestCase
     body = ActiveSupport::JSON.decode @response.body
     assert_not_nil(body['player_states'])
     assert_not_nil(body['turn'])
-    #assert_not_nil(body['stack'])
+    assert_not_nil(body['stack'])
     #assert_not_nil(body['combat'])
   end
 end

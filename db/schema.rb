@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120813182758) do
+ActiveRecord::Schema.define(:version => 20120813193002) do
 
   create_table "boards", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -49,6 +49,16 @@ ActiveRecord::Schema.define(:version => 20120813182758) do
   end
 
   create_table "players", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "stack_frames", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "stacks", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
