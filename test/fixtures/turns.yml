@@ -1,11 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  currentPlayer: 1
   phase: 'upkeep'
   count: 1
 
 two:
-  currentPlayer: 1
   phase: 'main phase 1'
   count: 1

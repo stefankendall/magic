@@ -4,6 +4,6 @@ class GameController < ApplicationController
   end
 
   def create
-    render json: '{}'
+    render json: Game.new_game
   end
 end
