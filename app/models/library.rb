@@ -3,8 +3,6 @@ class Library < ActiveRecord::Base
   has_many :cards
 
   def Library.create_default_library
-    library = Library.new
-    library.cards << FactoryGirl.create(:card)
-    library
+    FactoryGirl.create(:elf_deck)
   end
 end
