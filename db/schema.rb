@@ -34,8 +34,13 @@ ActiveRecord::Schema.define(:version => 20120813200520) do
   end
 
   create_table "cards", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "board_id"
+    t.integer  "library_id"
+    t.integer  "hand_id"
+    t.integer  "graveyard_id"
+    t.integer  "card_archetype_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
   end
 
   create_table "games", :force => true do |t|
