@@ -20,6 +20,8 @@ class Game < ActiveRecord::Base
   end
 
   def as_json(options)
-    super(:include => [:player_states, :turn, :stack])
+    options[:include] ||= [:player_states, :turn, :stack]
+    options[:except] ||= [:created_at, :updated_at]
+    super(options)
   end
 end

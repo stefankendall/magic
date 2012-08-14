@@ -18,4 +18,12 @@ class GameTest < ActiveSupport::TestCase
     game = Game.new_game
     assert_equal [], game.stack.stack_frames
   end
+
+  test "Serializing a game to json excludes created_at and updated_at" do
+    game = Game.new_game
+    json = ActiveSupport::JSON.decode(game.to_json)
+
+    assert_nil json['created_at']
+    assert_nil json['updated_at']
+  end
 end
