@@ -11,9 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120813193002) do
+ActiveRecord::Schema.define(:version => 20120813200520) do
 
   create_table "boards", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "card_archetypes", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -53,6 +59,12 @@ ActiveRecord::Schema.define(:version => 20120813193002) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "rules", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "stack_frames", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
@@ -66,6 +78,12 @@ ActiveRecord::Schema.define(:version => 20120813193002) do
   create_table "turns", :force => true do |t|
     t.string   "phase"
     t.integer  "count"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "types", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

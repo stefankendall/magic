@@ -1,9 +1,0 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
-
-one:
-  phase: 'upkeep'
-  count: 1
-
-two:
-  phase: 'main phase 1'
-  count: 1

@@ -5,7 +5,7 @@ class GameTest < ActiveSupport::TestCase
     game = Game.new_game
     assert_not_nil game.id
     assert_not_nil game.turn.id
-    assert_equal [], game.player_states
+    assert_equal 2, game.player_states.count
     assert_equal 2, Player.count
   end
 
