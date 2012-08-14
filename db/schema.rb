@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(:version => 20120813200520) do
 
   create_table "players", :force => true do |t|
     t.integer  "player_state_id"
+    t.integer  "turn_id"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end

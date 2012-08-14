@@ -9,7 +9,9 @@ class GameControllerTest < ActionController::TestCase
     get :show, {id:game_id}
     assert_response :success
     body = ActiveSupport::JSON.decode @response.body
-    puts body
+    assert_not_nil body['id']
+    assert_not_nil body['turn']
+    assert_not_nil body['stack']
   end
 
   test "games can be created" do
