@@ -1,5 +1,5 @@
 class Turn < ActiveRecord::Base
   has_one :player
-  attr_accessor :count, :phase, :player
+  belongs_to :game
   attr_accessible :count, :phase, :player
 end

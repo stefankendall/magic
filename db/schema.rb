@@ -58,13 +58,15 @@ ActiveRecord::Schema.define(:version => 20120813200520) do
   end
 
   create_table "player_states", :force => true do |t|
+    t.integer  "game_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
   create_table "players", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "player_state_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "rules", :force => true do |t|
@@ -79,6 +81,7 @@ ActiveRecord::Schema.define(:version => 20120813200520) do
   end
 
   create_table "stacks", :force => true do |t|
+    t.integer  "game_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -86,6 +89,7 @@ ActiveRecord::Schema.define(:version => 20120813200520) do
   create_table "turns", :force => true do |t|
     t.string   "phase"
     t.integer  "count"
+    t.integer  "game_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

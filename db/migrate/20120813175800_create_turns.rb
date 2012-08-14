@@ -4,6 +4,7 @@ class CreateTurns < ActiveRecord::Migration
       t.string :phase
       t.integer :count
 
+      t.references :game
       t.timestamps
     end
   end

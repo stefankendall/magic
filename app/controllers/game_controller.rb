@@ -1,9 +1,11 @@
 class GameController < ApplicationController
+  respond_to :json
+
   def show
-    render json: '{}'
+    respond_with Game.find(params[:id])
   end
 
   def create
-    render json: Game.new_game
+    respond_with Game.new_game
   end
 end

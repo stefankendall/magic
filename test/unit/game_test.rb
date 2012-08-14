@@ -3,9 +3,10 @@ require 'test_helper'
 class GameTest < ActiveSupport::TestCase
   test "Creating a new game cascades saves and create two players" do
     game = Game.new_game
-    assert_not_nil game.id
-    assert_not_nil game.turn.id
-    assert_equal 2, game.player_states.count
+    loaded_game = Game.find(game.id)
+    assert_not_nil loaded_game.id
+    assert_not_nil loaded_game.turn.id
+    assert_equal 2, loaded_game.player_states.count
     assert_equal 2, Player.count
   end
 

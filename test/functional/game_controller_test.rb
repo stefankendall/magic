@@ -2,8 +2,14 @@ require 'test_helper'
 
 class GameControllerTest < ActionController::TestCase
   test "games can be retrieved" do
-    get :show, {id:"12"}
+    post :create
+    body = ActiveSupport::JSON.decode @response.body
+    game_id = body['id']
+
+    get :show, {id:game_id}
     assert_response :success
+    body = ActiveSupport::JSON.decode @response.body
+    puts body
   end
 
   test "games can be created" do
