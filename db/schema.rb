@@ -20,8 +20,16 @@ ActiveRecord::Schema.define(:version => 20120813200520) do
 
   create_table "card_archetypes", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "colorlessCost"
+    t.integer  "greenCost"
+    t.integer  "redCost"
+    t.integer  "whiteCost"
+    t.integer  "blueCost"
+    t.integer  "blackCost"
+    t.integer  "power"
+    t.integer  "toughness"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "cards", :force => true do |t|
