@@ -9,8 +9,11 @@ class Game < ActiveRecord::Base
     player1 = Player.create
     player2 = Player.create
 
-    player_state1 = PlayerState.create player: player1, board: nil, hand: nil, library: nil, graveyard: nil
-    player_state2 = PlayerState.create player: player2, board: nil, hand: nil, library: nil, graveyard: nil
+    player1_library = Library.create_default_library
+    player2_library = Library.create_default_library
+
+    player_state1 = PlayerState.create player: player1, board: nil, hand: nil, library: player1_library, graveyard: nil
+    player_state2 = PlayerState.create player: player2, board: nil, hand: nil, library: player2_library, graveyard: nil
 
     game = Game.create player_states: [player_state1, player_state2]
     game.create_stack stack_frames: []

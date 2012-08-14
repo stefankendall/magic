@@ -27,4 +27,16 @@ class GameTest < ActiveSupport::TestCase
     assert_nil json['created_at']
     assert_nil json['updated_at']
   end
+
+  test "Creating a game creates a library for each player" do
+    game = Game.new_game
+    p0_library = game.player_states[0].library
+    p1_library = game.player_states[1].library
+
+    assert_not_nil p0_library
+    assert_true p0_library.cards.any?
+
+    assert_not_nil p1_library
+    assert_true p1_library.cards.any?
+  end
 end
