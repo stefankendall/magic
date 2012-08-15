@@ -8,6 +8,13 @@ class GameTest < ActiveSupport::TestCase
     assert_not_nil loaded_game.turn.id
     assert_equal 2, loaded_game.players.count
     assert_equal 2, Player.count
+
+    assert_not_nil Player.find_by_order(1)
+    assert_not_nil Player.find_by_order(2)
+
+    Player.all.each do |player|
+      assert_equal 20, player.life_total
+    end
   end
 
   test "Creating a game creates player_state for each player" do

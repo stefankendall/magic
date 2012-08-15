@@ -9,8 +9,8 @@ class Game < ActiveRecord::Base
     player1_library = Library.create_default_library
     player2_library = Library.create_default_library
 
-    player1 = Player.create board: nil, hand: nil, library: player1_library, graveyard: nil
-    player2 = Player.create board: nil, hand: nil, library: player2_library, graveyard: nil
+    player1 = Player.create board: nil, hand: nil, library: player1_library, graveyard: nil, order: 1, life_total: 20
+    player2 = Player.create board: nil, hand: nil, library: player2_library, graveyard: nil, order: 2, life_total: 20
 
     game = Game.create players: [player1, player2]
     game.create_stack stack_frames: []

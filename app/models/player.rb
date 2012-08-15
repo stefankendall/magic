@@ -5,5 +5,6 @@ class Player < ActiveRecord::Base
   has_one :hand
   has_one :library
   has_one :graveyard
-  attr_accessible :board, :hand, :library, :graveyard
+
+  attr_accessible :board, :hand, :library, :graveyard, :life_total, :order
 end
