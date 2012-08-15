@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   before_filter :default_format_json
+  respond_to :json
 
   def default_format_json
     if request.headers["HTTP_ACCEPT"].nil? && params[:format].nil?
