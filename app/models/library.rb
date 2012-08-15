@@ -1,5 +1,5 @@
 class Library < ActiveRecord::Base
-  belongs_to :player_state
+  belongs_to :player
   has_many :cards
 
   def Library.create_default_library

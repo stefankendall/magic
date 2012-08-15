@@ -1,4 +1,4 @@
 class Hand < ActiveRecord::Base
-  belongs_to :player_state
+  belongs_to :player
   has_many :cards
 end
