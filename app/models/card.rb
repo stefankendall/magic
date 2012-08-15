@@ -1,9 +1,6 @@
 class Card < ActiveRecord::Base
   belongs_to :card_archetype
-  belongs_to :board
-  belongs_to :library
-  belongs_to :graveyard
-  belongs_to :hand
+  belongs_to :card_holder, polymorphic: true
 
   attr_accessible :card_archetype
 

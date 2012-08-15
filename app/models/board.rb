@@ -1,4 +1,4 @@
 class Board < ActiveRecord::Base
   belongs_to :player
-  has_many :cards
+  has_many :cards, as: :card_holder
 end

@@ -11,4 +11,18 @@ class CardTest < ActiveSupport::TestCase
     c = Card.create(:card_archetype => card_archetype)
     assert_true c.save()
   end
+
+  test "A card can only belong to one holder at a time, but not two" do
+    card = FactoryGirl.create(:card)
+    library = Library.create()
+    hand = Hand.create()
+    library.cards << card
+    library.save()
+    hand.cards << card
+    hand.save()
+
+    assert_equal 1, hand.cards.count
+    assert_equal 0, library.cards.count
+ end
+
 end
