@@ -1,8 +1,6 @@
 require 'test_helper'
 
 class TurnTest < ActiveSupport::TestCase
-  @@FIRST_PHASE = Turn.PHASES[0]
-
   test "A saved turn can be retrieved" do
     game = Game.new_game
     game.turn.update_attributes(count: 5)
@@ -13,10 +11,10 @@ class TurnTest < ActiveSupport::TestCase
   test "next_phase moves to the next phase" do
     game = Game.new_game
     t = game.turn
-    t.update_attributes(phase: @@FIRST_PHASE, count: 1, player: game.players.first)
+    t.update_attributes(phase: Turn.PHASES[0], count: 1, player: game.players.first)
     t.next_phase
     t.reload
-    assert_equal "draw", t.phase
+    assert_equal Turn.PHASES[1], t.phase
     assert_equal 1, t.count
   end
 
@@ -41,15 +39,5 @@ class TurnTest < ActiveSupport::TestCase
     game = Game.new_game
     game.turn.update_attributes phase: 'end step', count: 1, player: game.players.first
     assert_false game.turn.should_increment_turn
-  end
-
-  test "should throw an error if the phase is being incremented with a non-empty stack" do
-    game = Game.new_game
-    game.stack.stack_frames << StackFrame.create()
-    game.turn.reload
-
-    assert_raises(ActiveRecord::RecordInvalid) do
-      game.turn.next_phase
-    end
   end
 end

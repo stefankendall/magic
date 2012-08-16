@@ -8,7 +8,7 @@ class PhaseControllerTest < ActionController::TestCase
     body = ActiveSupport::JSON.decode @response.body
     turn = body['turn']
     assert_equal 1, turn['count']
-    assert_equal "draw", turn['phase']
+    assert_equal "main phase 1", turn['phase']
   end
 
   def create_new_game

@@ -3,9 +3,11 @@ class Turn < ActiveRecord::Base
   belongs_to :game
   attr_accessible :count, :phase, :player
 
-  validate :stack_must_be_empty
-
+  attr_accessor :phases
   @@PHASES = ['untap', 'upkeep', 'draw', 'main phase 1', 'main phase 2', 'end step']
+  def Turn.PHASES
+    @@PHASES
+  end
 
   def next_phase
     current_index = @@PHASES.find_index phase
@@ -20,14 +22,15 @@ class Turn < ActiveRecord::Base
     self.save!
   end
 
-  def should_increment_turn
-    player.order == 2 && phase == 'end step'
+  def draw_step?
+    self.phase == 'draw'
   end
 
+  def main_phase_1?
+    self.phase == "main phase 1"
+  end
 
-  def stack_must_be_empty
-    unless self.game.stack.is_empty?
-      errors[:stack] << 'Stack must be empty to increment the phase'
-    end
+  def should_increment_turn
+    player.order == 2 && phase == 'end step'
   end
 end

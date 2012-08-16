@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(:version => 20120813200520) do
     t.integer  "card_holder_id"
     t.string   "card_holder_type"
     t.integer  "card_archetype_id"
+    t.integer  "position"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
   end

@@ -14,6 +14,16 @@ class LibraryTest < ActiveSupport::TestCase
 
   test "Creating a default library gives you 40 cards: 16 lands and 24 creatures" do
     library = Library.create_default_library
-    assert_equal(40, library.cards.count)
+    assert_equal 40, library.cards.count
+  end
+
+  test "top_card should return the card on top of the library" do
+    library = Library.create
+    card1 = FactoryGirl.create(:card, :position => 2)
+    card2 = FactoryGirl.create(:card, :position => 1)
+    library.cards << card2
+    library.cards << card1
+
+    assert_equal card2, library.top_card
   end
 end

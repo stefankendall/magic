@@ -53,4 +53,25 @@ class GameTest < ActiveSupport::TestCase
     assert_equal 1, game.turn.count
     assert_equal Player.find(1), game.turn.player
   end
+
+  test "should throw an error if the phase is being incremented with a non-empty stack" do
+    game = Game.new_game
+    game.stack.stack_frames << StackFrame.create()
+
+    assert_raises("error") do
+      game.next_phase
+    end
+  end
+
+  test "should draw a card and end in main phase 1 if I increment the phase from upkeep" do
+    game = Game.new_game
+    old_hand_count = game.players.first.hand.hand_size
+    old_library_count = game.players.first.library.card_count
+    game.next_phase
+    game.reload
+
+    assert_true game.turn.main_phase_1?
+    assert_equal old_hand_count + 1, game.players.first.hand.hand_size
+    assert_equal old_library_count - 1, game.players.first.library.card_count
+  end
 end
