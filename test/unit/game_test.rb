@@ -74,4 +74,16 @@ class GameTest < ActiveSupport::TestCase
     assert_equal old_hand_count + 1, game.players.first.hand.hand_size
     assert_equal old_library_count - 1, game.players.first.library.card_count
   end
+
+  test "forcing player 1 to draw a card with an empty library ends the game and makes player 2 win" do
+    game = Game.new_game
+    empty_library = Library.create
+    game.players[0].library = empty_library
+    game.draw_card_for_current_player
+
+    assert_equal 1, Result.count
+    assert_equal "Player 2", Result.first().winner
+  end
 end
+
+

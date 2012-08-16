@@ -36,12 +36,17 @@ class Game < ActiveRecord::Base
 
   def draw_card_for_current_player
     current_player = self.turn.player
-    current_player.hand.add_card current_player.library.top_card
+    top_card = current_player.library.top_card
+    if top_card.nil?
+      other_player = self.players.find {|p| p != current_player }
+      Result.create(winner: "Player #{other_player.order}", game: self)
+    else
+      current_player.hand.add_card top_card
+    end
   end
 
   def as_json(options)
     options[:include] ||= [:players, :turn, :stack]
-    options[:except] ||= [:created_at, :updated_at]
     super(options)
   end
 end
