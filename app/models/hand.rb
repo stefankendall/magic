@@ -10,4 +10,8 @@ class Hand < ActiveRecord::Base
   def hand_size
     cards.length
   end
+
+  def has_card?(card)
+    cards.include? card
+  end
 end

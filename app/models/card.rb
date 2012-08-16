@@ -5,4 +5,8 @@ class Card < ActiveRecord::Base
   attr_accessible :card_archetype, :position
 
   validates :card_archetype, :presence => true
+
+  def has_rule?(rule)
+    card_archetype.rules.select {|r| r.name == rule}.present?
+  end
 end

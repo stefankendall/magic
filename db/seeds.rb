@@ -5,3 +5,12 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+land = Rule.find_or_create_by_name("Land")
+basic = Rule.find_or_create_by_name("Basic")
+forest = Rule.find_or_create_by_name("Forest")
+creature = Rule.find_or_create_by_name("Creature")
+elf = Rule.find_or_create_by_name("Elf")
+warrior = Rule.find_or_create_by_name("Warrior")
+
+CardArchetype.find_or_create_by_name('Forest', rules: [land, basic, forest])
+CardArchetype.find_or_create_by_name('Elvish Warrior', rules: [creature, warrior, elf], greenCost: 2, power: 2, toughness: 3)

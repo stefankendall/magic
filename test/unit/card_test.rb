@@ -6,6 +6,13 @@ class CardTest < ActiveSupport::TestCase
     assert_false c.save()
   end
 
+  test "has_rule? detects types correctly" do
+    c = FactoryGirl.create(:card, archetype: 'Forest')
+    assert_true c.has_rule? "Forest"
+    assert_true c.has_rule? "Land"
+    assert_false c.has_rule? "Warrior"
+  end
+
   test "Card can be created with an archetype" do
     card_archetype = CardArchetype.create(name: "Birds of Paradise")
     c = Card.create(:card_archetype => card_archetype)

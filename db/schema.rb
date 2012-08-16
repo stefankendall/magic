@@ -33,6 +33,11 @@ ActiveRecord::Schema.define(:version => 20120816180754) do
     t.datetime "updated_at",    :null => false
   end
 
+  create_table "card_archetypes_rules", :force => true do |t|
+    t.integer "card_archetype_id"
+    t.integer "rule_id"
+  end
+
   create_table "cards", :force => true do |t|
     t.integer  "card_holder_id"
     t.string   "card_holder_type"

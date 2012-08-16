@@ -9,11 +9,11 @@ class Game < ActiveRecord::Base
     player1_library = Library.create_default_library
     player2_library = Library.create_default_library
 
-    player1_hand = Hand.create()
-    player2_hand = Hand.create()
+    player1_hand = Hand.create
+    player2_hand = Hand.create
 
-    player1 = Player.create board: nil, hand: player1_hand, library: player1_library, graveyard: nil, order: 1, life_total: 20
-    player2 = Player.create board: nil, hand: player2_hand, library: player2_library, graveyard: nil, order: 2, life_total: 20
+    player1 = Player.create board: Board.create, hand: player1_hand, library: player1_library, graveyard: Graveyard.create, order: 1, life_total: 20
+    player2 = Player.create board: Board.create, hand: player2_hand, library: player2_library, graveyard: Graveyard.create, order: 2, life_total: 20
 
     game = Game.create players: [player1, player2]
     game.create_stack stack_frames: []
@@ -31,6 +31,13 @@ class Game < ActiveRecord::Base
     if turn.draw_step?
       draw_card_for_current_player
       self.turn.next_phase
+    end
+  end
+
+  def play_card(card)
+    player = card.card_holder.player
+    if card.has_rule? "Land"
+
     end
   end
 

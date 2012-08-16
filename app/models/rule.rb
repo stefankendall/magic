@@ -1,4 +1,4 @@
 class Rule < ActiveRecord::Base
   attr_accessible :name
-  validates :name, :uniqueness => true
+  has_and_belongs_to_many :card_archetype
 end

@@ -4,10 +4,7 @@ FactoryGirl.define do
       archetype "Forest"
     end
     f.card_archetype_id {
-      CardArchetype.find_or_create_by_name(archetype).id
+      CardArchetype.find_by_name(archetype).id
     }
-    #initialize_with {
-    #  Card.new(archetype)
-    #}
   end
 end
