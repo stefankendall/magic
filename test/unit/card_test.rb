@@ -17,9 +17,7 @@ class CardTest < ActiveSupport::TestCase
     library = Library.create()
     hand = Hand.create()
     library.cards << card
-    library.save()
     hand.cards << card
-    hand.save()
 
     assert_equal 1, hand.cards.count
     assert_equal 0, library.cards.count

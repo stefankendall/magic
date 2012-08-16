@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class TurnTest < ActiveSupport::TestCase
+  @@FIRST_PHASE = Turn.PHASES[0]
+
   test "A saved turn can be retrieved" do
     game = Game.new_game
     game.turn.update_attributes(count: 5)
@@ -11,7 +13,7 @@ class TurnTest < ActiveSupport::TestCase
   test "next_phase moves to the next phase" do
     game = Game.new_game
     t = game.turn
-    t.update_attributes(phase: 'upkeep', count: 1, player: game.players.first)
+    t.update_attributes(phase: @@FIRST_PHASE, count: 1, player: game.players.first)
     t.next_phase
     t.reload
     assert_equal "draw", t.phase

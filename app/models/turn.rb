@@ -5,7 +5,7 @@ class Turn < ActiveRecord::Base
 
   validate :stack_must_be_empty
 
-  @@PHASES = ['upkeep', 'draw', 'main phase 1', 'main phase 2', 'end step']
+  @@PHASES = ['untap', 'upkeep', 'draw', 'main phase 1', 'main phase 2', 'end step']
 
   def next_phase
     current_index = @@PHASES.find_index phase
