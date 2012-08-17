@@ -4,6 +4,10 @@ class Stack < ActiveRecord::Base
 
   attr_accessible :stack_frames
 
+  def add_card(card, player, targets)
+    stack_frames << StackFrame.create(card: card, targets: targets, player: player)
+  end
+
   def is_empty?
     !stack_frames.any?
   end

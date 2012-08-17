@@ -44,4 +44,8 @@ class ActiveSupport::TestCase
     post :next, {:id => game_id}
     @controller = old_controller
   end
+
+  def progress_phase(game_id, turn_symbol)
+    Game.find(game_id).turn.send turn_symbol
+  end
 end

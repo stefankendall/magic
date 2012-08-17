@@ -1,4 +1,4 @@
-class Rule
+class RuleImplementation
   def responds_to_event?(event)
     raise 'must be overridden'
   end

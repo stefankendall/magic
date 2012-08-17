@@ -35,17 +35,15 @@ class Game < ActiveRecord::Base
   end
 
   def play_card(card)
-    player = card.card_holder.player
-    if card.has_rule? "Land"
-
-    end
+    event = Event.new(card: card, player: card.card_holder.player, game: self, action: 'play')
+    RuleNotifier.instance.emit event
   end
 
   def draw_card_for_current_player
     current_player = self.turn.player
     top_card = current_player.library.top_card
     if top_card.nil?
-      other_player = self.players.find {|p| p != current_player }
+      other_player = self.players.find { |p| p != current_player }
       Result.create(winner: "Player #{other_player.order}", game: self)
     else
       current_player.hand.add_card top_card
