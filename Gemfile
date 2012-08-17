@@ -8,6 +8,7 @@ gem 'rails', '3.2.7'
 gem 'sqlite3'
 gem 'factory_girl_rails'
 gem 'factory_girl'
+gem 'bullet'
 
 group :test do
   gem 'test-unit'
