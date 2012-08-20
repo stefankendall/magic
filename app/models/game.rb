@@ -12,8 +12,8 @@ class Game < ActiveRecord::Base
     player1_hand = Hand.create
     player2_hand = Hand.create
 
-    player1 = Player.create board: Board.create, hand: player1_hand, library: player1_library, graveyard: Graveyard.create, order: 1, life_total: 20
-    player2 = Player.create board: Board.create, hand: player2_hand, library: player2_library, graveyard: Graveyard.create, order: 2, life_total: 20
+    player1 = Player.create board: Board.create, hand: player1_hand, library: player1_library, graveyard: Graveyard.create, order: 1, life_total: 20, mana_pool: ManaPool.create
+    player2 = Player.create board: Board.create, hand: player2_hand, library: player2_library, graveyard: Graveyard.create, order: 2, life_total: 20, mana_pool: ManaPool.create
 
     game = Game.create players: [player1, player2]
     game.create_stack stack_frames: []
@@ -34,8 +34,8 @@ class Game < ActiveRecord::Base
     end
   end
 
-  def play_card(card)
-    event = Event.new(card: card, player: card.card_holder.player, game: self, action: 'play')
+  def play_card(card, ability)
+    event = Event.new(card: card, player: card.card_holder.player, game: self, action: ability)
     RuleNotifier.instance.emit event
   end
 

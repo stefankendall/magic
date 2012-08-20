@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120817185534) do
+ActiveRecord::Schema.define(:version => 20120820135319) do
 
   create_table "boards", :force => true do |t|
     t.integer  "player_id"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(:version => 20120817185534) do
     t.string   "card_holder_type"
     t.integer  "card_archetype_id"
     t.integer  "position"
+    t.boolean  "tapped"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
   end
@@ -68,6 +69,18 @@ ActiveRecord::Schema.define(:version => 20120817185534) do
     t.integer  "player_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "mana_pools", :force => true do |t|
+    t.integer  "green",      :default => 0
+    t.integer  "white",      :default => 0
+    t.integer  "red",        :default => 0
+    t.integer  "blue",       :default => 0
+    t.integer  "black",      :default => 0
+    t.integer  "colorless",  :default => 0
+    t.integer  "player_id"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   create_table "players", :force => true do |t|

@@ -12,5 +12,7 @@ creature = Rule.find_or_create_by_name("Creature")
 elf = Rule.find_or_create_by_name("Elf")
 warrior = Rule.find_or_create_by_name("Warrior")
 
-CardArchetype.find_or_create_by_name('Forest', rules: [land, basic, forest])
+tap_for_green = Rule.find_or_create_by_name("tap for green")
+
+CardArchetype.find_or_create_by_name('Forest', rules: [land, basic, forest, tap_for_green])
 CardArchetype.find_or_create_by_name('Elvish Warrior', rules: [creature, warrior, elf], greenCost: 2, power: 2, toughness: 3)

@@ -12,4 +12,7 @@ class Event
   def play_action?
     action == "play"
   end
+  def tap_for_green?
+    action == "tap for green"
+  end
 end

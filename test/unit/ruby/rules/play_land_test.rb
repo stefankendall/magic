@@ -95,4 +95,15 @@ class PlayLandTest < ActiveSupport::TestCase
     game.turn.to_main_phase_1
     play_land_rule.respond_to_event Event.new(game: game, action: 'play', card: land3, player: game.players[0])
   end
+
+  test "Forests come into play untapped" do
+    game = Game.new_game
+    play_land_rule = PlayLand.new
+    land1 = FactoryGirl.create(:card, archetype: "Forest")
+    game.players[0].hand.add_card land1
+
+    game.turn.to_main_phase_1
+    play_land_rule.respond_to_event Event.new(game: game, action: 'play', card: land1, player: game.players[0])
+    assert_false land1.tapped
+  end
 end

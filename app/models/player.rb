@@ -5,6 +5,9 @@ class Player < ActiveRecord::Base
   has_one :hand
   has_one :library
   has_one :graveyard
+  has_one :mana_pool
 
-  attr_accessible :board, :hand, :library, :graveyard, :life_total, :order
+  attr_accessible :board, :hand, :library, :graveyard, :life_total, :order, :mana_pool
+
+  validates :mana_pool, :presence => true
 end

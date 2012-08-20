@@ -86,7 +86,7 @@ class GameTest < ActiveSupport::TestCase
     card = FactoryGirl.create(:card, :archetype => 'Forest')
     game.players[0].hand.add_card card
     assert_raise(InvalidPlayError) do
-      game.play_card(card)
+      game.play_card card, "play"
     end
   end
 end

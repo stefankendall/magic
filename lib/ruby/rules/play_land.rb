@@ -37,6 +37,8 @@ class PlayLand < RuleImplementation
   end
 
   def play_land event
+    event.card.update_attributes :tapped => false
+
     event.player.board.add_card event.card
     event.game.turn.save_turn_action TurnAction.create(card: event.card, player: event.player, name: 'play')
   end

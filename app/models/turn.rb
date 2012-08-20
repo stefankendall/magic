@@ -5,7 +5,9 @@ class Turn < ActiveRecord::Base
   attr_accessible :count, :phase, :player
 
   attr_accessor :phases
-  @@PHASES = ['untap', 'upkeep', 'draw', 'main phase 1', 'main phase 2', 'end step']
+  @@PHASES = ['untap', 'upkeep', 'draw', 'main phase 1', 'begin combat', 'declare attackers', 'declare blockers', 'combat damage', 'end combat', 'main phase 2', 'end step', 'cleanup']
+  @@MANA_DRAIN_PHASES = ['untap', 'main phase 1', 'begin combat', 'main phase 2', 'end step']
+
 
   def Turn.PHASES
     @@PHASES
@@ -25,8 +27,18 @@ class Turn < ActiveRecord::Base
       new_count = count + 1
     end
 
+    if should_drain_mana @@PHASES[new_phase_index]
+      game.players.each do |player|
+        player.mana_pool.empty
+      end
+    end
+
     self.assign_attributes :phase => @@PHASES[new_phase_index], :count => new_count
     self.save!
+  end
+
+  def should_drain_mana(phase)
+    @@MANA_DRAIN_PHASES.include? phase
   end
 
   def save_turn_action(turn_action)
@@ -57,6 +69,10 @@ class Turn < ActiveRecord::Base
     update_attributes :phase => 'main phase 1'
   end
 
+  def to_combat_phase
+    update_attributes :phase => 'begin combat'
+  end
+
   def to_main_phase_2
     update_attributes :phase => 'main phase 2'
   end
@@ -66,7 +82,7 @@ class Turn < ActiveRecord::Base
   end
 
   def should_increment_turn
-    player.order == 2 && phase == 'end step'
+    player.order == 2 && phase == 'cleanup'
   end
 
   def next_turn

@@ -4,6 +4,8 @@ class CreateCards < ActiveRecord::Migration
       t.references :card_holder, :polymorphic => true
       t.references :card_archetype
       t.integer :position
+      t.boolean :tapped
+
       t.timestamps
     end
   end
