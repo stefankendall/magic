@@ -1,7 +1,7 @@
 require 'ruby/rules/rule_implementation'
 class PlayCreature < RuleImplementation
   def responds_to_event?(event)
-    event.card.has_rule? 'Creature' && event.action == 'play'
+    event.card.has_rule?('Creature') && event.action == 'play'
   end
 
   def respond_to_event(event)

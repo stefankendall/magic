@@ -58,5 +58,5 @@ Magic::Application.routes.draw do
   resources :game, :defaults => {:format => 'json'}
 
   get '/game/:id/phase/next' => "phase#next"
-  post '/game/:id/card/:card_id/play' => 'card#play'
+  post '/game/:id/card/:card_id/play' => "card#play"
 end
