@@ -10,4 +10,13 @@ class BoardTest < ActiveSupport::TestCase
     saved_board = Board.find(board.id)
     assert_equal 1, saved_board.cards.count
   end
+
+  test "has_card can find cards" do
+    board = Board.create
+    elf = FactoryGirl.create :card, archetype: 'Elvish Warrior'
+    assert_false board.has_card? elf
+
+    board.add_card elf
+    assert_true board.has_card? elf
+  end
 end

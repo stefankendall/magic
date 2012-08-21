@@ -17,4 +17,15 @@ class Stack < ActiveRecord::Base
   def is_empty?
     !stack_frames.any?
   end
+
+  def top_card
+    unless self.is_empty?
+      stack_frames.last.card
+    end
+  end
+
+  def remove_top_card
+    stack_frames.last.delete
+    self.reload
+  end
 end
