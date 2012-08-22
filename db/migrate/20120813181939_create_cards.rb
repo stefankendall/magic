@@ -5,6 +5,8 @@ class CreateCards < ActiveRecord::Migration
       t.references :card_archetype
       t.integer :position
       t.boolean :tapped
+      t.boolean :summoning_sick
+      t.boolean :attacking
 
       t.timestamps
     end

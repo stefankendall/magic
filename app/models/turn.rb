@@ -35,6 +35,10 @@ class Turn < ActiveRecord::Base
 
     self.assign_attributes :phase => @@PHASES[new_phase_index], :count => new_count
     self.save!
+
+    if phase == 'end combat'
+      RuleNotifier.instance.emit(Event.new(:action => "end combat"))
+    end
   end
 
   def should_drain_mana(phase)
@@ -61,6 +65,10 @@ class Turn < ActiveRecord::Base
     main_phase_1? or main_phase_2?
   end
 
+  def declare_attackers?
+    self.phase == "declare attackers"
+  end
+
   def to_upkeep
     update_attributes :phase => 'upkeep'
   end
@@ -71,6 +79,14 @@ class Turn < ActiveRecord::Base
 
   def to_combat_phase
     update_attributes :phase => 'begin combat'
+  end
+
+  def to_end_combat
+    update_attributes :phase => 'end combat'
+  end
+
+  def to_declare_attackers
+    update_attributes :phase => 'declare attackers'
   end
 
   def to_main_phase_2

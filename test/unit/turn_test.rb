@@ -126,4 +126,20 @@ class TurnTest < ActiveSupport::TestCase
     mana_pool.reload
     assert_false mana_pool.is_empty?
   end
+
+  test "All creatures are unmarked as attacking when the phase moves out of resolve combat damage" do
+    game = Game.new_game
+    game.turn.to_combat_phase
+    elvish_warrior = FactoryGirl.create(:card, archetype: 'Elvish Warrior')
+    elvish_warrior.summoning_sick = false
+    elvish_warrior.attacking = true
+    game.players[0].board.add_card elvish_warrior
+
+    game.turn.to_end_combat
+
+    game.players[0].board.cards.each do |card|
+      assert_false card.attacking
+    end
+  end
+
 end

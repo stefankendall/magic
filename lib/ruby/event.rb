@@ -12,6 +12,11 @@ class Event
   def play_action?
     action == "play"
   end
+
+  def declare_attackers_action?
+    action == "declare attackers"
+  end
+
   def tap_for_green?
     action == "tap for green"
   end

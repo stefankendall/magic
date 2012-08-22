@@ -44,6 +44,8 @@ ActiveRecord::Schema.define(:version => 20120820135319) do
     t.integer  "card_archetype_id"
     t.integer  "position"
     t.boolean  "tapped"
+    t.boolean  "summoning_sick"
+    t.boolean  "attacking"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
   end
