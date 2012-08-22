@@ -8,9 +8,4 @@ class Board < ActiveRecord::Base
     card.position = cards.length + 1
     cards << card
   end
-
-  def has_card?(card)
-    cards.exists? card
-  end
-
 end

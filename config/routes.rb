@@ -59,4 +59,5 @@ Magic::Application.routes.draw do
 
   get '/game/:id/phase/next' => "phase#next"
   post '/game/:id/card/:card_id/play' => "card#play"
+  get '/game/:id/resolve' => "stack#resolve"
 end

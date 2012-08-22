@@ -1,5 +1,5 @@
 require 'test_helper'
-require 'ruby/rules/invalid_play_error'
+require 'ruby/rules/errors/invalid_play_error'
 
 class GameTest < ActiveSupport::TestCase
   test "Creating a new game cascades saves and create two players" do
@@ -78,7 +78,7 @@ class GameTest < ActiveSupport::TestCase
     assert_equal "Player 2", Result.first().winner
   end
 
-  test "When a land is played by the current player in main phase 1 with a non-empty stack, the event being processed by the rule notifier is marked invalid" do
+  test "A land cannot be played with a non empty stack" do
     game = Game.new_game
     game.turn.to_main_phase_1
 
@@ -86,8 +86,25 @@ class GameTest < ActiveSupport::TestCase
     card = FactoryGirl.create(:card, :archetype => 'Forest')
     game.players[0].hand.add_card card
     assert_raise(InvalidPlayError) do
-      game.play_card card, "play"
+      game.activate_ability card, "play"
     end
+  end
+
+  test "Resolving a creature moves the card to the player's board" do
+    game = Game.new_game
+    game.turn.to_main_phase_1
+
+    elf_one = FactoryGirl.create(:card, :archetype => 'Elvish Warrior')
+    game.stack.add_card elf_one, game.players[1], []
+
+    elf_two = FactoryGirl.create(:card, :archetype => 'Elvish Warrior')
+    game.stack.add_card elf_two, game.players[0], []
+
+    game.resolve_top_of_stack
+    game.resolve_top_of_stack
+
+    assert_true game.players[1].board.has_card? elf_one
+    assert_true game.players[0].board.has_card? elf_two
   end
 end
 

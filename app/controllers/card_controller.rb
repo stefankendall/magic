@@ -2,9 +2,11 @@ class CardController < ApplicationController
   def play
     game = Game.find params[:id]
     card = Card.find params[:card_id]
-    ability = params[:ability].present? ? params[:ability] : 'play'
-
-    game.play_card card, ability
+    if params[:ability].present?
+      game.activate_ability card, params[:ability]
+    else
+      game.play_card card
+    end
 
     respond_with game
   end

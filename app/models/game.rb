@@ -34,8 +34,20 @@ class Game < ActiveRecord::Base
     end
   end
 
-  def play_card(card, ability)
-    event = Event.new(card: card, player: card.card_holder.player, game: self, action: ability)
+  def resolve_top_of_stack
+    RuleNotifier.instance.emit Event.new card: stack.top_card, game: self, action: 'resolve'
+  end
+
+  def play_card(card)
+    emit_event card, 'play'
+  end
+
+  def activate_ability(card, ability)
+    emit_event card, ability
+  end
+
+  def emit_event(card, event_type)
+    event = Event.new card: card, player: card.card_holder.player, game: self, action: event_type
     RuleNotifier.instance.emit event
   end
 

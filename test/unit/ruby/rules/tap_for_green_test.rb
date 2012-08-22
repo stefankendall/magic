@@ -19,7 +19,7 @@ class TapForGreenTest < ActiveSupport::TestCase
 
     card = FactoryGirl.create(:card, archetype: 'Forest')
     game.players[0].hand.add_card card
-    game.play_card card, 'play'
+    game.activate_ability card, 'play'
     tap_for_green_rule.respond_to_event Event.new(game: game, action: 'tap for green', card: card, player: game.players[0])
 
     assert_true card.tapped

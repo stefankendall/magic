@@ -52,8 +52,17 @@ class StackTest < ActiveSupport::TestCase
     elf = FactoryGirl.create :card, archetype: 'Elvish Warrior'
     stack.add_card elf, nil
 
-    stack.remove_top_card
+    stack.remove_top
 
     assert_false stack.has_card? elf
+  end
+
+  test "get_casting_player returns the player that cast a spell on the stack" do
+    stack = Stack.create
+    player = Player.create
+    elf = FactoryGirl.create :card, archetype: 'Elvish Warrior'
+    stack.add_card elf, player
+
+    assert_equal player, stack.get_casting_player(elf)
   end
 end

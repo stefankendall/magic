@@ -19,7 +19,6 @@ class GameControllerTest < ActionController::TestCase
     assert_not_nil(body['players'])
     assert_not_nil(body['turn'])
     assert_not_nil(body['stack'])
-    #assert_not_nil(body['combat'])
   end
 
   test "created_at and updated_at are not present in the GET game response at all" do

@@ -24,8 +24,14 @@ class Stack < ActiveRecord::Base
     end
   end
 
-  def remove_top_card
-    stack_frames.last.delete
-    self.reload
+  def remove_top
+    stack_frames.delete(stack_frames.last)
+  end
+
+  def get_casting_player(card)
+    stack_frame = stack_frames.find do |stack_frame|
+      stack_frame.card == card
+    end
+    stack_frame.player
   end
 end

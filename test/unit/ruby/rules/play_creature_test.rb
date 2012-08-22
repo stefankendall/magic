@@ -8,7 +8,7 @@ class PlayCreatureTest < ActiveSupport::TestCase
 
   test "PlayCreature responds to Elvish Warrior" do
     play_creature_rule = PlayCreature.new
-    assert_true play_creature_rule.responds_to_event? Event.new(:card => FactoryGirl.create(:card, archetype: 'Elvish Warrior'))
+    assert_true play_creature_rule.responds_to_event? Event.new(:action => 'play', :card => FactoryGirl.create(:card, archetype: 'Elvish Warrior'))
   end
 
   test "Playing a creature without sufficient mana throws an error" do

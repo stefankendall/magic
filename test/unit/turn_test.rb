@@ -95,8 +95,8 @@ class TurnTest < ActiveSupport::TestCase
 
     card = FactoryGirl.create(:card, archetype: 'Forest')
     game.players[0].hand.add_card card
-    game.play_card card, 'play'
-    game.play_card card, 'tap for green'
+    game.activate_ability card, 'play'
+    game.activate_ability card, 'tap for green'
 
     mana_pool = game.players[0].mana_pool
     mana_pool.reload
@@ -115,10 +115,10 @@ class TurnTest < ActiveSupport::TestCase
     game.turn.to_main_phase_1
     card = FactoryGirl.create(:card, archetype: 'Forest')
     game.players[0].hand.add_card card
-    game.play_card card, 'play'
+    game.activate_ability card, 'play'
 
     game.turn.to_combat_phase
-    game.play_card card, 'tap for green'
+    game.activate_ability card, 'tap for green'
 
     game.turn.next_phase
 

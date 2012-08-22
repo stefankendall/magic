@@ -14,7 +14,8 @@ class ResolveCreature < RuleImplementation
   end
 
   def resolve_creature event
-    event.game.stack.remove_top_card
-    event.player.board.add_card event.card
+    player = event.game.stack.get_casting_player event.card
+    event.game.stack.remove_top
+    player.board.add_card event.card
   end
 end

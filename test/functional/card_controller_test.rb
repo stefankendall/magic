@@ -1,23 +1,6 @@
 require 'test_helper'
 
 class CardControllerTest < ActionController::TestCase
-  def play_forest(game)
-    progress_phase game.id, :to_main_phase_1
-
-    card = FactoryGirl.create(:card, archetype: 'Forest')
-
-    game.players[0].hand.add_card card
-    post :play, {id: game.id, card_id: card.id}
-    game.reload
-    card
-  end
-
-  def next_turn(game)
-    game.turn.next_turn
-    game.reload
-    game.turn.next_turn
-  end
-
   test "I can play a land from my hand" do
     game = Game.find create_new_game
     card = play_forest(game)
