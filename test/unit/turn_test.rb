@@ -142,4 +142,14 @@ class TurnTest < ActiveSupport::TestCase
     end
   end
 
+  test "Transitioning into the untap phase should untap all creatures" do
+    game = Game.new_game
+    game.turn.to_cleanup
+    elvish_warrior = FactoryGirl.create(:card, archetype: 'Elvish Warrior', tapped: true)
+    game.players[0].board.add_card elvish_warrior
+
+    game.turn.next_phase
+
+    assert_false elvish_warrior.tapped
+  end
 end

@@ -36,9 +36,7 @@ class Turn < ActiveRecord::Base
     self.assign_attributes :phase => @@PHASES[new_phase_index], :count => new_count
     self.save!
 
-    if phase == 'end combat'
-      RuleNotifier.instance.emit(Event.new(:action => "end combat"))
-    end
+    RuleNotifier.instance.emit(Event.new(:action => phase))
   end
 
   def should_drain_mana(phase)
@@ -95,6 +93,10 @@ class Turn < ActiveRecord::Base
 
   def to_end_step
     update_attributes :phase => 'end step'
+  end
+
+  def to_cleanup
+    update_attributes :phase => 'cleanup'
   end
 
   def should_increment_turn
